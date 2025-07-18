@@ -1,0 +1,55 @@
+plugins {
+    id 'java'
+    id 'net.serenity-bdd.serenity-gradle-plugin' version '4.2.22'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    // ─── JUnit4 (para SerenityRunner) ───────────────────────────
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'net.serenity-bdd:serenity-junit:4.2.22'
+
+    // ─── Cucumber + Serenity ────────────────────────────────────
+    testImplementation 'io.cucumber:cucumber-java:7.20.1'      // <––– aquí
+    testImplementation 'io.cucumber:cucumber-junit:7.20.1'
+    testImplementation 'net.serenity-bdd:serenity-cucumber:4.2.22'
+
+    // ─── Serenity Screenplay ────────────────────────────────────
+    implementation 'net.serenity-bdd:serenity-screenplay:4.2.22'
+    implementation 'net.serenity-bdd:serenity-screenplay-webdriver:4.2.22'
+
+    // ─── Serenity Core & Integraciones ──────────────────────────
+    testImplementation 'net.serenity-bdd:serenity-core:4.2.22'
+    testImplementation 'net.serenity-bdd:serenity-browserstack:4.2.22'
+
+    // ─── Selenium & WebDriverManager ─────────────────────────────
+    implementation 'org.seleniumhq.selenium:selenium-java:4.27.0'
+    implementation 'io.github.bonigarcia:webdrivermanager:5.9.2'
+
+    // ─── BrowserStack Local (opcional) ───────────────────────────
+    implementation 'com.browserstack:browserstack-local-java:1.0.6'
+
+    // ─── Variables de entorno ────────────────────────────────────
+    implementation 'io.github.cdimascio:java-dotenv:5.2.2'
+}
+
+
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_18
+    targetCompatibility = JavaVersion.VERSION_18
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(18)
+    }
+}
+
+tasks.named('test') {
+    systemProperty 'serenity.environment', System.getProperty('environment', 'local')
+    systemProperty 'webdriver.driver', System.getenv('BROWSER') ?: 'chrome'
+    systemProperty 'serenity.take.screenshots', 'AFTER_EACH_STEP'
+    systemProperty 'base.url', 'https://backoffice-v2.qa.wcbackoffice.com/'
+}
