@@ -19,6 +19,11 @@ out/
 # Ignorar configuración local de Serenity
 serenity.properties
 
+# Ignorar archivo de variables de entorno
+.env
+
+
+
 ### Eclipse ###
 .apt_generated
 .classpath
