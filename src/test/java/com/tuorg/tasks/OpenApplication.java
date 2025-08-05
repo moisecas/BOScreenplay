@@ -3,7 +3,6 @@ package com.tuorg.tasks;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Open;
 import net.serenitybdd.screenplay.Actor;
-
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 
 public class OpenApplication implements Task {
@@ -25,4 +24,3 @@ public class OpenApplication implements Task {
         );
     }
 }
-

@@ -1,7 +1,7 @@
 
 // Definición de targets o locators o los botones mapeados a interacturar
 
-package com.tuorg.UI;
+package com.tuorg.ui;
 
 import net.serenitybdd.screenplay.targets.Target; //target para definir y referenciar elementos de la interfaz
 import org.openqa.selenium.By;
@@ -25,7 +25,8 @@ public class LoginPageUI {
 
     public static final Target ERROR_INVALID = Target
             .the("mensaje credenciales inválidas")
-            .located(By.xpath("//span[contains(text(),'Combinación de usuario y contraseña incorrecta')]"));
+            .located(By.xpath("//div[@class='input-group']//div[@class='invalid-feedback'][normalize-space()='Valor ingresado no válido.']"));
+
 
     public static final Target ERROR_EMPTY = Target
             .the("mensaje campos obligatorios")
@@ -33,6 +34,16 @@ public class LoginPageUI {
 
     public static final Target ERROR_CREDENTIALS = Target
             .the("mensaje usuario o contraseña incorrectos")
-            .located(By.xpath("//div[@class='form-group has-error']"));
+            .located(By.cssSelector("div.invalid-feedback"));
+
+    /** Mensaje global de alerta (usuario o pass inválido) */
+    public static final Target ALERT_DANGER = Target
+            .the("mensaje de alerta-danger")
+            .located(By.xpath("//div[@class='input-group']//div[@class='invalid-feedback'][normalize-space()='Valor ingresado no válido.']"));
+
+    /** Mensaje de validación de campo (campos vacíos) */
+    public static final Target INVALID_FEEDBACK = Target
+            .the("mensaje invalid-feedback")
+            .located(By.xpath("//div[@class='input-group']//div[@class='invalid-feedback'][normalize-space()='Valor ingresado no válido.']"));
 }
 

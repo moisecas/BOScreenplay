@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
-
+import io.github.cdimascio.dotenv.Dotenv;
 import com.tuorg.actors.ActorBase;
 import com.tuorg.tasks.OpenApplication;
 import com.tuorg.tasks.Login;
@@ -19,27 +19,43 @@ import net.serenitybdd.screenplay.actors.OnStage;
 @RunWith(SerenityRunner.class)
 public class ScreenplayTest {
 
+    private Dotenv env;
+
     private WebDriver browser;
 
     @Before
     public void setUp() {
-        // 1) Inicializa el Stage
+        //inicio
         OnStage.setTheStage(ActorBase.THE_CAST);
 
-        // 2) Levanta el driver
+        // carga variables de env
+        env = Dotenv.configure()
+                .directory("./")    // carpeta donde está .env
+                .ignoreIfMissing()  // no falle si no existe
+                .load();
+
+        // creación del driver
         WebDriverManager.chromedriver().setup();
         browser = new ChromeDriver();
 
-        // 3) Llama al actor y dale la habilidad
+
+
+        // actor y acción
         OnStage.theActorCalled("Moises")
                 .can(BrowseTheWeb.with(browser));
     }
 
     @Test
     public void usuarioPuedeLoguearse() {
+        // lee las credenciales desde el env
+        String baseUrl = env.get("BASE_URL", System.getProperty("base.url"));
+        String user    = env.get("TEST_USER");
+        String pass    = env.get("TEST_PASS");
+
+        // ejecuta el flujo
         OnStage.theActorInTheSpotlight().attemptsTo(
-                OpenApplication.at(System.getProperty("base.url")),
-                Login.with("usuario","password")
+                OpenApplication.at(baseUrl),
+                Login.with(user, pass)
         );
     }
 }
