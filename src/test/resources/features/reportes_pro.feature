@@ -1,4 +1,4 @@
-# src/test/resources/features/reportes_pro.feature
+
 @smoke
 Feature: Acceso y filtro de reportes (menú por texto)
   Background: Usuario autenticado

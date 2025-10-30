@@ -1,15 +1,14 @@
 // src/main/java/com/tuorg/ui/ReportColumnsUI.java
 package com.tuorg.ui;
 
-import net.serenitybdd.screenplay.Actor;
-import net.serenitybdd.screenplay.AnonymousPerformableFunction;
+
 import net.serenitybdd.screenplay.Task;
-import net.serenitybdd.screenplay.actions.Click;
+
 import net.serenitybdd.screenplay.targets.Target;
 import net.serenitybdd.screenplay.actions.Scroll;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 import net.serenitybdd.screenplay.Performable;
-import java.time.Duration;
+
 import java.util.List;
 
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
@@ -93,7 +92,7 @@ public class ReportColumnsUI {
     public static final Target PB_C_RONDA         = Target.the("PB col Ronda").locatedBy(THEAD + "//th[.//span[normalize-space()='Ronda']]");
     public static final Target PB_C_OBSERVACIONES = Target.the("PB col Observaciones").locatedBy(THEAD + "//th[normalize-space()='Observaciones']");
 
-    // --- FILTROS: XPaths SCOPED + fallback GLOBAL ---
+    // --- FILTROS ---
     private static final String[] FILTROS_ANY_SCOPED = new String[] {
             PB_FILTERS_PANEL + "//*[(self::label and @for='table-filter-start-date-filter') or @id='table-filter-start-date-filter'][1]",
             PB_FILTERS_PANEL + "//*[(self::label and @for='table-filter-end-date-filter')   or @id='table-filter-end-date-filter'][1]",
