@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(
-        features = "src/test/resources/features/listPlayer.feature",
+        features = "src/test/resources/features/reportes_pro.feature",
         glue     = "com.tuorg.steps",
         plugin   = {"pretty","html:target/cucumber-reports.html"}
 )

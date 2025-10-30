@@ -8,34 +8,36 @@ repositories {
 }
 
 dependencies {
-
-    // ─── JUnit4 (para SerenityRunner) ───────────────────────────
+    // --- JUnit4 (runners) ---
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'net.serenity-bdd:serenity-junit:4.2.22'
 
-    // ─── Cucumber + Serenity ────────────────────────────────────
-    testImplementation 'io.cucumber:cucumber-java:7.20.1'      // <––– aquí
+    // --- Cucumber + Serenity ---
+    testImplementation 'io.cucumber:cucumber-java:7.20.1'
     testImplementation 'io.cucumber:cucumber-junit:7.20.1'
     testImplementation 'net.serenity-bdd:serenity-cucumber:4.2.22'
 
-    // ─── Serenity Screenplay ────────────────────────────────────
+    // --- Serenity Screenplay ---
     implementation 'net.serenity-bdd:serenity-screenplay:4.2.22'
     implementation 'net.serenity-bdd:serenity-screenplay-webdriver:4.2.22'
 
-    // ─── Serenity Core & Integraciones ──────────────────────────
-    testImplementation 'net.serenity-bdd:serenity-core:4.2.22'
-    testImplementation 'net.serenity-bdd:serenity-browserstack:4.2.22'
+    // --- Serenity Core & utilidades ---
+    // ⬇️ Cambia esto de testImplementation -> implementation
+    implementation 'net.serenity-bdd:serenity-core:4.2.22'
+    // ⬇️ Añade esto si usas Ensure. (recomendado)
+    implementation 'net.serenity-bdd:serenity-ensure:4.2.22'
 
-    // ─── Selenium & WebDriverManager ─────────────────────────────
+    // --- Selenium & WebDriverManager ---
     implementation 'org.seleniumhq.selenium:selenium-java:4.27.0'
     implementation 'io.github.bonigarcia:webdrivermanager:5.9.2'
 
-    // ─── BrowserStack Local (opcional) ───────────────────────────
+    // --- BrowserStack Local (opcional) ---
     implementation 'com.browserstack:browserstack-local-java:1.0.6'
 
-    // ─── Variables de entorno ────────────────────────────────────
+    // --- Variables de entorno ---
     implementation 'io.github.cdimascio:java-dotenv:5.2.2'
 }
+
 
 
 
@@ -51,5 +53,5 @@ tasks.named('test') {
     systemProperty 'serenity.environment', System.getProperty('environment', 'local')
     systemProperty 'webdriver.driver', System.getenv('BROWSER') ?: 'chrome'
     systemProperty 'serenity.take.screenshots', 'AFTER_EACH_STEP'
-    systemProperty 'base.url', 'https://backoffice-v2.qa.wcbackoffice.com/'
+    systemProperty 'base.url', 'https://backoffice-v2-wyc.andes-system.com/'
 }
